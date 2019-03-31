@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include "Student.h"
+using namespace std;
+
+Student::Student(int wT, int tL, int tA)
+{
+    int numbers[3] = {wT, tL, tA};
+
+    for (int i = 0; i < 3; ++i)
+        if(numbers[i] < 0) throw invalid_argument(" recieved negative value: " + numbers[i]);
+
+
+    waitTime = wT;
+    timeLeft = tL;
+    timeArrived = tA;
+}
+
+Student::~Student()
+{
+
+}
+
+// Prints the stats for debugging purposes
+void Student::printStats()
+{
+    cout << "Wait Time: " << waitTime << endl;
+    cout << "Time Left: " << timeLeft << endl;
+    cout << "Time Arrived: " << timeArrived << endl;
+}
+
+// Moves time ahead one minute for the currentStudent
+void Student::age()
+{
+    if(timeLeft > 0)
+        timeLeft--;
+    else
+        throw underflow_error(" a student has waited too long and their wait time is now negative");
+}
