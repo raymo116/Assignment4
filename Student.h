@@ -1,4 +1,4 @@
-#ifndef MRCV_ASSIGNMENT1
+#ifndef STUDENT_H
 
 #include <iostream>
 #include <string>
@@ -8,6 +8,8 @@ class Student
 {
 private:
 public:
+    // Default Constructor
+    Student();
     // Constructor
     Student(int waitTime, int timeLeft, int timeArrived);
     // Destructor
