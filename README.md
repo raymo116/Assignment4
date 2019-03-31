@@ -49,13 +49,5 @@ Simulation
   - `student.waitTime++;`
   - Check if student wait time is more than 10
   - `Registrar.worldTime++;`
-Calculate stats
-- The mean student wait time.
-- The median student wait time.
-- The longest student wait time.
-- The number of students waiting over 10 minutes
-- The mean window idle time
-- The longest window idle time
-- Number of windows idle for over 5 minutes.
 Output
 - Print stats
