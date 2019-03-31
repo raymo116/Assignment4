@@ -21,6 +21,13 @@ Student::~Student()
 
 }
 
+Student::Student()
+{
+    waitTime = 0;
+    timeLeft = 0;
+    timeArrived = 0;
+}
+
 // Prints the stats for debugging purposes
 void Student::printStats()
 {
