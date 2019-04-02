@@ -80,7 +80,7 @@ DoublyLinkedList<T>::~DoublyLinkedList()
     while (size > 0)
     {
         next = current->next;
-        next->prev = NULL;
+        if(next!=NULL) next->prev = NULL;
         current->next = NULL;
         delete current;
         current = next;
