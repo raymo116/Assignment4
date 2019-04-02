@@ -13,7 +13,7 @@ class GenQ
 
         void insert (T d); //enqueue
         T remove(); //dequeue
-        T front(); //peak
+        T front(); //peek
 
         bool isFull();
         bool isEmpty();
