@@ -13,7 +13,7 @@ Window::Window()
 // Destructor
 Window::~Window()
 {
-
+    // cout << "sub" << endl;
 }
 
 // Prints the stats for debugging purposes
@@ -21,29 +21,46 @@ void Window::printStats()
 {
     cout << "Current Idle Time: " << currentIdleTime << endl;
     cout << "Longest Idle time: " << longestIdleTime << endl;
+    cout << "Currently Helping Student: " << ((helpingStudent)?"True":"False") << endl;
+    currentStudent.printStats();
+    cout << endl;
 }
 
 // Moves time ahead one minute for the current Window
-void Window::age()
+void Window::age(GenQ<Student>* myQueue)
 {
-    // if(!helpingStudent)
-    // {
-    //     currentIdleTime++;
-    //     if(currentIdleTime>longestIdleTime) longestIdleTime = currentIdleTime;
-    // }
-    // else
+    if(!helpingStudent)
+    {
+        currentIdleTime++;
+        if(currentIdleTime>longestIdleTime) longestIdleTime = currentIdleTime;
+
+        if(!(myQueue->isEmpty()))
+        {
+            addStudent(myQueue->remove());
+            currentStudent.age();
+        }
+    }
+    else if(currentStudent.timeLeft > 0)
+    {
         currentStudent.age();
-        currentStudent.printStats();
+        currentIdleTime = 0;
+    }
+    else deleteStudent(myQueue);
 }
 
 // Deletes the current Student
-void Window::deleteStudent(Student& s)
+void Window::deleteStudent(GenQ<Student>* myQueue)
 {
-    if(helpingStudent) delete &currentStudent;
     helpingStudent = false;
+
+    if(!(myQueue->isEmpty()))
+    {
+        addStudent(myQueue->remove());
+        currentStudent.age();
+    }
 }
 
-void Window::addStudent(Student& s)
+void Window::addStudent(Student s)
 {
     if(!helpingStudent) currentStudent = s;
     helpingStudent = true;
