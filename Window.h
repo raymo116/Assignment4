@@ -3,29 +3,30 @@
 #include <iostream>
 #include <string>
 #include "Student.h"
+#include "GenQ.h"
 using namespace std;
 
 class Window
 {
 private:
 public:
-    // Constructor
     Window();
     // Destructor
     ~Window();
     // Prints the stats for debugging purposes
     void printStats();
     // Moves time ahead one minute for the current Window
-    void age();
+    void age(GenQ<Student>* myQueue);
     // Deletes the current Student
-    void deleteStudent(Student& s);
+    void deleteStudent(GenQ<Student>* myQueue);
     // Adds a new Student
-    void addStudent(Student& s);
+    void addStudent(Student s);
 
     Student currentStudent;
     unsigned int currentIdleTime;
     unsigned int longestIdleTime;
     bool helpingStudent;
+    // GenQ<Student>* myQueue;
 };
 
 #endif
