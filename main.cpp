@@ -1,36 +1,33 @@
 #include <iostream>
 #include <string>
-#include "Window.h"
+#include <cstdlib>
+// #include "Window.h"
+// #include "genQ.h"
+#include "Registrar.h"
+
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    GenQ<Student> myQueue;
+    Registrar myReg(3, &myQueue);
 
-    Window myWindow1;
-    Window myWindow2;
-    // cout << myWindow.helpingStudent << endl;
-    Student myStudent(10, 10, 10);
-
-    myWindow1.addStudent(myStudent);
-    myWindow2.addStudent(myStudent);
-    // cout << myWindow.helpingStudent << endl;
-
-    for (size_t i = 0; i < 3; i++)
-    {
-        myStudent.printStats();
-        cout << endl;
-        myWindow1.age();
-        cout << endl;
-        // myStudent.age();
-        // myWindow2.age();
-        // myWindow2.age();
+    for (size_t i = 0; i < 10; i++) {
+        Student myStud(1, 1, 1);
+        myQueue.insert(myStud);
     }
 
-    // cout << "\n\n\n\n";
+    while(!myQueue.isEmpty())
+    {
+        myReg.age();
+        myReg.printStats();
+        // cout << "Queue Size: " << myQueue.numElements << endl;
+    }
 
-    // myWindow1.age();
-    // myWindow2.age();
-
+    for (size_t i = 0; i < 10; i++) {
+        myReg.age();
+        myReg.printStats();
+    }
 
     return 0;
 }
