@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <stdexcept>
 
@@ -34,7 +35,7 @@ ListNode<T>::ListNode(T d)
 template <class T>
 ListNode<T>::~ListNode()
 {
-    //you know
+
 }
 
 ////Template Doubly Linked List Class////
@@ -54,6 +55,7 @@ class DoublyLinkedList
         T removeFront();
         T removeBack();
         T remove(T key);
+        ListNode<T>* getHead() {return front;}
 
         void printList();
         T find(T val); //search()
@@ -76,7 +78,6 @@ DoublyLinkedList<T>::~DoublyLinkedList()
 {
     ListNode<T> *current = front;
     ListNode<T> *next = front;
-
     while (size > 0)
     {
         next = current->next;
