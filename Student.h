@@ -11,7 +11,7 @@ public:
     // Default Constructor
     Student();
     // Constructor
-    Student(int waitTime, int timeLeft, int timeArrived);
+    Student(int waitTime, int timeArrived);
     // Destructor
     ~Student();
     // Prints the stats for debugging purposes

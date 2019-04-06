@@ -3,16 +3,16 @@
 #include "Student.h"
 using namespace std;
 
-Student::Student(int wT, int tL, int tA)
+Student::Student(int wT, int tA)
 {
-    int numbers[3] = {wT, tL, tA};
+    int numbers[2] = {wT, tA};
 
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 2; ++i)
         if(numbers[i] < 0) throw invalid_argument(" recieved negative value: " + numbers[i]);
 
 
     waitTime = wT;
-    timeLeft = tL;
+    timeLeft = wT;
     timeArrived = tA;
 }
 
