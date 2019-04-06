@@ -44,6 +44,7 @@ GenQ<T>::GenQ(int maxSize)
     numElements = 0;
 }
 
+
 template <class T>
 GenQ<T>::~GenQ()
 {
