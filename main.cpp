@@ -2,31 +2,43 @@
 #include <string>
 #include <cstdlib>
 // #include "Window.h"
-// #include "genQ.h"
+#include "genQ.h"
+#include "fileIO.h"
 #include "Registrar.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    GenQ<Student> myQueue;
-    Registrar myReg(3, &myQueue);
+    FileIO io;
 
-    for (size_t i = 0; i < 10; i++) {
-        Student myStud(1, 1, 1);
-        myQueue.insert(myStud);
+    GenQ<int> *test = io.getQueue();
+    int j = test->getSize();
+
+    int windows = test->remove();
+    int timeArrived;
+    int numStudents;
+    int timeNeeded;
+
+    GenQ<Student> waitingLine;
+    Registrar myReg(windows, &waitingLine);
+
+    while(!test->isEmpty())
+    {
+        timeArrived = test->remove();
+        int numStudents = test->remove();
+        for(int i = 0; i < numStudents; i++)
+        {
+            timeNeeded = test->remove();
+            waitingLine.insert(Student(timeNeeded, timeArrived));
+        }
     }
 
-    while(!myQueue.isEmpty())
+    while(!waitingLine.isEmpty())
     {
         myReg.age();
         myReg.printStats();
-        // cout << "Queue Size: " << myQueue.numElements << endl;
-    }
-
-    for (size_t i = 0; i < 10; i++) {
-        myReg.age();
-        myReg.printStats();
+        cout << "Queue Size: " << waitingLine.numElements << endl;
     }
 
     return 0;
