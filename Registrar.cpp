@@ -1,12 +1,12 @@
 #include <string>
 #include <iostream>
-// #include "Window.h"
+#include <algorithm>
 #include "Registrar.h"
-// #include "GenQ.h"
 
 Registrar::Registrar(unsigned int nOW, GenQ<Student>* mQ, int sWT)
 {
     numberOfWindows = nOW;
+    windows = new Window[numberOfWindows];
     genSetup();
     myQueue = mQ;
     studentWaitTimes = new int[sWT];
@@ -19,7 +19,7 @@ void Registrar::genSetup()
     futureStudents = 0;
     studentsServed = 0;
 
-    // Determined later
+    //Stats
     meanStudentWait = 0;
     medianStudentWait = 0;
     maxStudentWait = 0;
@@ -38,13 +38,14 @@ void Registrar::genSetup()
 Registrar::Registrar()
 {
     numberOfWindows = 8;
+    windows = new Window[numberOfWindows];
     genSetup();
 }
 
-// I don't think we need this because the destructors for the windows are being called anyway
 Registrar::~Registrar()
 {
     delete[] studentWaitTimes;
+    delete[] windows;
 }
 
 void Registrar::age(int* sS)
@@ -55,12 +56,26 @@ void Registrar::age(int* sS)
 
 void Registrar::printStats()
 {
-    cout << "WORLD TIME: " << worldTime << endl;
-    for (int i = 0; i < numberOfWindows; i++)
-    {
-        windows[i].printStats();
-    }
-    cout << "==================================================" << endl;
+    // cout << "WORLD TIME: " << worldTime << endl;
+    // for (int i = 0; i < numberOfWindows; i++)
+    // {
+    //     windows[i].printStats();
+    // }
+    // cout << "==================================================" << endl;
+
+    cout << "Mean student wait time: " << meanStudentWait << endl;
+
+    cout << "Median student wait time: " << medianStudentWait << endl;
+
+    cout << "Longest a student waited: " << maxStudentWait << endl;
+
+    cout << "Number of students waiting over 10 minutes: " << longStudentWaitTimes << endl;
+
+    cout << "Mean window idle time: " << meanWindowIdleTime << endl;
+
+    cout << "Longest window idle time: "<<maxWindowIdleTime << endl;
+
+    cout << "Number of windows idle for over 5 minutes: " << windowsIdleFor5Minutes << endl;
 }
 
 bool Registrar::isFull()
@@ -73,18 +88,52 @@ bool Registrar::isEmpty()
 
 }
 
-void Registrar::calculateStats()
+void Registrar::calculateStats(int allStudents)
 {
+    //Student calcuations
+    //Sort array first
+    sort(studentWaitTimes, studentWaitTimes+allStudents);
+
+    //Longest student wait time
+    maxStudentWait = studentWaitTimes[allStudents-1];
+
+    int studentSum = 0;
+
+    //Iterate to find sum and number of students waiting over 10
+    for (size_t i = 0; i < allStudents; i++) {
+        //cout << myReg.studentWaitTimes[i] << endl;
+        if(studentWaitTimes[i] > 10)
+            longStudentWaitTimes++;
+        studentSum += studentWaitTimes[i];
+    }
+
+    //Calcuate mean
+    meanStudentWait = studentSum/allStudents;
+
+    //Find median
+    if(allStudents%2!=0)
+    {
+        medianStudentWait = studentWaitTimes[allStudents/2];
+    }
+    else
+    {
+        medianStudentWait = ((studentWaitTimes[allStudents/2-1])+(studentWaitTimes[allStudents/2]))/2;
+    }
 
 
-    /*
-    unsigned int meanStudentWait;
-    unsigned int medianStudentWait;
-    unsigned int maxStudentWait;
-    unsigned int longStudentWaitTimes;
+    //Window calcuations run the same way
+    maxWindowIdleTime = windows[numberOfWindows-1].longestIdleTime;
 
-    unsigned int meanWindowIdleTime;
-    unsigned int maxWindowIdleTime;
-    unsigned int windowsIdleFor5Minutes;
-    */
+    int windowSum = 0;
+
+    for (int i = 0; i < numberOfWindows; ++i)
+    {
+        if(windows[i].longestIdleTime>maxWindowIdleTime) maxWindowIdleTime = windows[i].longestIdleTime;
+        if(windows[i].longestIdleTime > 5)
+            windowsIdleFor5Minutes++;
+        windowSum += windows[i].totalIdleTime;
+    }
+
+    meanWindowIdleTime = windowSum/numberOfWindows;
+
 }

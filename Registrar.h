@@ -3,31 +3,30 @@
 #include <string>
 #include <iostream>
 #include "Window.h"
-// #include "GenQ.h"
 
 class Registrar
 {
 private:
 public:
     Registrar();
-    Registrar(unsigned int numberOfWindos, GenQ<Student>* myQueue, int allStudents);
+    Registrar(unsigned int numberOfWindows, GenQ<Student>* myQueue, int allStudents);
     ~Registrar();
     void age(int* sS);
     void printStats();
     bool isFull();
     bool isEmpty();
     void genSetup();
-    void calculateStats();
+    void calculateStats(int allStudents);
     GenQ<Student>* myQueue;
 
-    unsigned int numberOfWindows;
+    int numberOfWindows;
 
     unsigned int worldTime;
 
     unsigned int futureStudents;
     unsigned int studentsServed;
 
-    Window windows[8];
+    Window *windows;
 
     unsigned int meanStudentWait;
     unsigned int medianStudentWait;

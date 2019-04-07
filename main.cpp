@@ -1,33 +1,30 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <algorithm>
-
 #include "genQ.h"
 #include "fileIO.h"
 #include "Registrar.h"
 
 using namespace std;
 
-int main(int argc, char const *argv[])
+void analyze(string filepath)
 {
-    FileIO io;
+    FileIO io (filepath);
+    GenQ<int> *file = io.getQueue();
 
     int studentsServed = 0;
     int allStudents;
-
-    GenQ<int> *file = io.getQueue();
-    int j = file->getSize();
-
-    int windows = file->remove();
     int timeArrived;
     int numStudents;
     int timeNeeded;
 
+    int windows = file->remove();
+
+    //We have 2 queues, one of all students ever and one of ones in the building
     GenQ<Student> futureStudents;
     GenQ<Student> waitingLine;
 
-
+    //Parse input for setup
     while(!file->isEmpty())
     {
         timeArrived = file->remove();
@@ -39,43 +36,44 @@ int main(int argc, char const *argv[])
         }
     }
 
+    //we get the size of the queue of all students for metrics later
     allStudents = futureStudents.getSize();
 
+    //Create a simulation
     Registrar myReg(windows, &waitingLine, allStudents);
 
-    myReg.printStats();
-
+    //Run simulation
     while(allStudents != studentsServed)
     {
+        //Advance time
         myReg.worldTime++;
+
+        //If there are any students left and the front student's arrival time is the world time
         while((!futureStudents.isEmpty())&&(futureStudents.front().timeArrived == myReg.worldTime))
         {
+            //That student walks in
             waitingLine.insert(futureStudents.remove());
         }
 
         myReg.age(&studentsServed);
-
-        // myReg.printStats();
-        // cout << "Queue Size: " << waitingLine.numElements << endl;
     }
 
-    // Mean
-    sort(myReg.studentWaitTimes, myReg.studentWaitTimes+allStudents);
+    //Calcuate and print stats
+    myReg.calculateStats(allStudents);
+    myReg.printStats();
+}
 
-    for (size_t i = 0; i < allStudents; i++) {
-        cout << myReg.studentWaitTimes[i] << endl;
-    }
-
-    cout << "Median Student Wait Time: " ;
-
-    if(allStudents%2!=0)
+int main(int argc, char const *argv[])
+{
+    if(argc > 0)
     {
-        cout << (myReg.studentWaitTimes[allStudents/2]) << endl;
+        string filepath = argv[1];
+        analyze(filepath);
     }
     else
     {
-        cout << ((myReg.studentWaitTimes[allStudents/2-1])+(myReg.studentWaitTimes[allStudents/2]))/2 << endl;
+        cout << "Please provide the file path for a text document" << endl;
+        cout << "USAGE ./main.out <file-path>" << endl;
     }
-
     return 0;
 }
