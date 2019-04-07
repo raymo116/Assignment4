@@ -25,6 +25,7 @@ public:
     Student currentStudent;
     unsigned int currentIdleTime;
     unsigned int longestIdleTime;
+    unsigned int totalIdleTime;
     bool helpingStudent;
     // GenQ<Student>* myQueue;
 };

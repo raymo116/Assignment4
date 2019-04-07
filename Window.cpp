@@ -10,6 +10,7 @@ Window::Window()
     helpingStudent = false;
     currentIdleTime = 0;
     longestIdleTime = 0;
+    totalIdleTime = 0;
     helpingStudent = 0;
 }
 
@@ -35,6 +36,7 @@ void Window::age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldT
     if(!helpingStudent)
     {
         currentIdleTime++;
+        totalIdleTime++;
         if(currentIdleTime>longestIdleTime) longestIdleTime = currentIdleTime;
 
         if(!(myQueue->isEmpty()))
