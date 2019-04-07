@@ -11,7 +11,6 @@ class FileIO
         ~FileIO();
 
         GenQ<int>* getQueue();
-        int getSize(ifstream &file);
 
         string filepath;
         GenQ<int> *output;
