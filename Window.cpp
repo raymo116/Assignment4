@@ -8,6 +8,9 @@ using namespace std;
 Window::Window()
 {
     helpingStudent = false;
+    currentIdleTime = 0;
+    longestIdleTime = 0;
+    helpingStudent = 0;
 }
 
 // Destructor
@@ -27,7 +30,7 @@ void Window::printStats()
 }
 
 // Moves time ahead one minute for the current Window
-void Window::age(GenQ<Student>* myQueue)
+void Window::age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldTime)
 {
     if(!helpingStudent)
     {
@@ -45,18 +48,26 @@ void Window::age(GenQ<Student>* myQueue)
         currentStudent.age();
         currentIdleTime = 0;
     }
-    else deleteStudent(myQueue);
+
+    if(helpingStudent && (currentStudent.timeLeft == 0))
+    {
+        (*sWT)[(*sH)++] = worldTime-(currentStudent.timeArrived);
+        (*sS)++;
+        deleteStudent(myQueue);
+    }
 }
 
 // Deletes the current Student
 void Window::deleteStudent(GenQ<Student>* myQueue)
 {
     helpingStudent = false;
+    currentIdleTime++;
+
 
     if(!(myQueue->isEmpty()))
     {
         addStudent(myQueue->remove());
-        currentStudent.age();
+        // currentStudent.age();
     }
 }
 
@@ -64,4 +75,5 @@ void Window::addStudent(Student s)
 {
     if(!helpingStudent) currentStudent = s;
     helpingStudent = true;
+    // cout << "here" << endl;
 }

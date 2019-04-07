@@ -4,11 +4,13 @@
 #include "Registrar.h"
 // #include "GenQ.h"
 
-Registrar::Registrar(unsigned int nOW, GenQ<Student>* mQ)
+Registrar::Registrar(unsigned int nOW, GenQ<Student>* mQ, int sWT)
 {
     numberOfWindows = nOW;
     genSetup();
     myQueue = mQ;
+    studentWaitTimes = new int[sWT];
+    studentHead = 0;
 }
 
 void Registrar::genSetup()
@@ -42,25 +44,13 @@ Registrar::Registrar()
 // I don't think we need this because the destructors for the windows are being called anyway
 Registrar::~Registrar()
 {
-    /*
-    for (int i = 0; i < numberOfWindows; ++i)
-    {
-        delete &windows[i];
-    }
-    */
+    delete[] studentWaitTimes;
 }
 
-void Registrar::age()
+void Registrar::age(int* sS)
 {
     for (int i = 0; i < numberOfWindows; ++i)
-    {
-        // if(!(windows[i].helpingStudent) && !(myQueue->isEmpty()))
-        // {
-        //     windows[i].addStudent(myQueue->remove());
-        // }
-        windows[i].age(myQueue);
-    }
-    worldTime++;
+        windows[i].age(myQueue, sS, &studentHead, &studentWaitTimes, worldTime);
 }
 
 void Registrar::printStats()
@@ -70,7 +60,7 @@ void Registrar::printStats()
     {
         windows[i].printStats();
     }
-    cout << "==========" << endl;
+    cout << "==================================================" << endl;
 }
 
 bool Registrar::isFull()
@@ -85,7 +75,7 @@ bool Registrar::isEmpty()
 
 void Registrar::calculateStats()
 {
-    
+
 
     /*
     unsigned int meanStudentWait;

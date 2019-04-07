@@ -10,7 +10,6 @@ Student::Student(int wT, int tA)
     for (int i = 0; i < 2; ++i)
         if(numbers[i] < 0) throw invalid_argument(" recieved negative value: " + numbers[i]);
 
-
     waitTime = wT;
     timeLeft = wT;
     timeArrived = tA;

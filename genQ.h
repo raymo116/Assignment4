@@ -74,7 +74,7 @@ T GenQ<T>::remove()
 template <class T>
 T GenQ<T>::front()
 {
-    return myQueue->front->data;
+    return myQueue->getHead()->data;
 }
 
 template <class T>

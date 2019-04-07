@@ -1,4 +1,4 @@
-#ifndef WINDOW_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -16,7 +16,7 @@ public:
     // Prints the stats for debugging purposes
     void printStats();
     // Moves time ahead one minute for the current Window
-    void age(GenQ<Student>* myQueue);
+    void age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int wT);
     // Deletes the current Student
     void deleteStudent(GenQ<Student>* myQueue);
     // Adds a new Student
@@ -28,5 +28,3 @@ public:
     bool helpingStudent;
     // GenQ<Student>* myQueue;
 };
-
-#endif

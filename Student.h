@@ -1,4 +1,4 @@
-#ifndef STUDENT_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -25,6 +25,3 @@ public:
     unsigned int studentIDNumber;
     static unsigned int numberOfStudents;
 };
-
-
-#endif

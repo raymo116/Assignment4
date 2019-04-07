@@ -1,4 +1,4 @@
-#ifndef REGISTRAR_H
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -10,9 +10,9 @@ class Registrar
 private:
 public:
     Registrar();
-    Registrar(unsigned int numberOfWindos, GenQ<Student>* myQueue);
+    Registrar(unsigned int numberOfWindos, GenQ<Student>* myQueue, int allStudents);
     ~Registrar();
-    void age();
+    void age(int* sS);
     void printStats();
     bool isFull();
     bool isEmpty();
@@ -37,6 +37,7 @@ public:
     unsigned int meanWindowIdleTime;
     unsigned int maxWindowIdleTime;
     unsigned int windowsIdleFor5Minutes;
-};
 
-#endif
+    int *studentWaitTimes;
+    int studentHead;
+};
