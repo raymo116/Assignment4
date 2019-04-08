@@ -48,6 +48,11 @@ GenQ<int>* FileIO::getQueue()
     {
         if(line != "")
         {
+            for (int i = 0; i < line.length(); i++)
+            {
+                if((line[i] > '9')||(line[i] < '0'))
+                    throw invalid_argument( "There was an invalid character entered");
+            }
             output->insert(atoi(line.c_str()));
         }
 
