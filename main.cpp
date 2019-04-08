@@ -30,7 +30,7 @@ void analyze(string filepath);
 int main(int argc, char const *argv[])
 {
     // Extra space
-    cout << "\n\n\n\n\n\n\n\n\n\n" << endl;
+    cout << endl;
 
     // Checks to make sure that the inputs are valid
     if((argc > 0) && (argv[1] != NULL))
@@ -51,12 +51,15 @@ int main(int argc, char const *argv[])
         cout << "Please provide the file path for a text document" << endl;
         cout << "USAGE ./mRaymond_cValencia.out <file-path>" << endl;
     }
+
+    cout << "\nThe program exited successfully." << endl;
     return 0;
 }
 
 // Takes in a filepath and parses the file into the registrar class
 void analyze(string filepath)
 {
+    cout << "Begin reading from file..." << endl;
     // File io object
     FileIO io (filepath);
     // Queue for numbers in file
@@ -94,6 +97,9 @@ void analyze(string filepath)
         //Create a simulation
         Registrar myReg(windows, &waitingLine, allStudents);
 
+        cout << "Success.\n" << endl;
+
+        cout << "Begining simulation..." << endl;
         //Run simulation
         while(allStudents != studentsServed)
         {
@@ -108,10 +114,12 @@ void analyze(string filepath)
             }
             myReg.age(&studentsServed);
         }
-
+        cout << "Simulation terminated successfully.\n\nPrinting results..." << endl;
         //Calcuate and print stats
         myReg.calculateStats(allStudents);
         myReg.printStats();
+
+        cout << "Done." << endl;
     }
     catch(out_of_range)
     {
