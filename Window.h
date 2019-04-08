@@ -8,18 +8,25 @@ using namespace std;
 
 class Window
 {
-private:
 public:
+    // Constructor
     Window();
+
     // Destructor
     ~Window();
-    // Prints the stats for debugging purposes
-    void printStats();
+
     // Moves time ahead one minute for the current Window
+    // Takes in a pointer to a queue of students, a pointer to studentsServed,
+    // a pointer to studentHead, a pointer to studentWaitTimes, and the worldtime
     void age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int wT);
+
     // Deletes the current Student
-    void deleteStudent(GenQ<Student>* myQueue);
-    // Adds a new Student
+    // Takes in a pointer to a queue of students, a pointer to studentsServed,
+    // a pointer to studentHead, a pointer to studentWaitTimes, and the worldtime
+    void deleteStudent(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldTime);
+
+    // Add a new student to the window
+    // Takes in a student
     void addStudent(Student s);
 
     Student currentStudent;
@@ -27,5 +34,4 @@ public:
     unsigned int longestIdleTime;
     unsigned int totalIdleTime;
     bool helpingStudent;
-    // GenQ<Student>* myQueue;
 };

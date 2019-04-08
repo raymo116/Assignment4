@@ -1,2 +1,2 @@
 output: *.cpp
-	g++ *.cpp -o main.out
+	g++ *.cpp -o mRaymond_cValencia.out

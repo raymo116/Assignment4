@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// This class simulates a Window at the registrar's office
+
 // Constructor
 Window::Window()
 {
@@ -17,31 +19,32 @@ Window::Window()
 // Destructor
 Window::~Window()
 {
-    // cout << "sub" << endl;
-}
 
-// Prints the stats for debugging purposes
-void Window::printStats()
-{
-    cout << "Current Idle Time: " << currentIdleTime << endl;
-    cout << "Longest Idle time: " << longestIdleTime << endl;
-    cout << "Currently Helping Student: " << ((helpingStudent)?"True":"False") << endl;
-    currentStudent.printStats();
-    cout << endl;
 }
 
 // Moves time ahead one minute for the current Window
+// Takes in a pointer to a queue of students, a pointer to studentsServed,
+// a pointer to studentHead, a pointer to studentWaitTimes, and the worldtime
 void Window::age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldTime)
 {
+    // If the window is not already helping a student
     if(!helpingStudent)
     {
+        // Increase the idle time
         currentIdleTime++;
         totalIdleTime++;
+
+        // Set longest idle time
         if(currentIdleTime>longestIdleTime) longestIdleTime = currentIdleTime;
 
         if(!(myQueue->isEmpty()))
         {
+            // Add new student to the queue
             addStudent(myQueue->remove());
+            // Record how much time that student has spend waiting
+            (*sWT)[(*sH)++] = worldTime-(currentStudent.timeArrived);
+            (*sS)++;
+            // Age the current student
             currentStudent.age();
         }
     }
@@ -51,31 +54,33 @@ void Window::age(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldT
         currentIdleTime = 0;
     }
 
+    // If the student is done being helped
     if(helpingStudent && (currentStudent.timeLeft == 0))
-    {
-        (*sWT)[(*sH)++] = worldTime-(currentStudent.timeArrived);
-        (*sS)++;
-        deleteStudent(myQueue);
-    }
+        deleteStudent(myQueue, sS, sH, sWT, worldTime);
 }
 
 // Deletes the current Student
-void Window::deleteStudent(GenQ<Student>* myQueue)
+// Takes in a pointer to a queue of students, a pointer to studentsServed,
+// a pointer to studentHead, a pointer to studentWaitTimes, and the worldtime
+void Window::deleteStudent(GenQ<Student>* myQueue, int* sS, int* sH, int** sWT, int worldTime)
 {
     helpingStudent = false;
     currentIdleTime++;
 
-
     if(!(myQueue->isEmpty()))
     {
+        // Add a new student
         addStudent(myQueue->remove());
-        // currentStudent.age();
+        // Record how much time that student has spend waiting
+        (*sWT)[(*sH)++] = worldTime-(currentStudent.timeArrived-1);
+        (*sS)++;
     }
 }
 
+// Add a new student to the window
+// Takes in a student
 void Window::addStudent(Student s)
 {
     if(!helpingStudent) currentStudent = s;
     helpingStudent = true;
-    // cout << "here" << endl;
 }

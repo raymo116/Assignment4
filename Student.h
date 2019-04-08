@@ -4,6 +4,8 @@
 #include <string>
 using namespace std;
 
+// This class simulates a student at the registrar's office
+
 class Student
 {
 private:
@@ -14,8 +16,6 @@ public:
     Student(int waitTime, int timeArrived);
     // Destructor
     ~Student();
-    // Prints the stats for debugging purposes
-    void printStats();
     // Moves time ahead one minute for the currentStudent
     void age();
 

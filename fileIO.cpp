@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
+// ToDo: remove cstring #include <cstring>
 #include <string>
 #include <stdlib.h>
 
@@ -9,44 +9,50 @@
 
 using namespace std;
 
+// Deafault constructor
 FileIO::FileIO()
 {
     filepath = "file.test";
 }
+
+// Overloaded constructor
 FileIO::FileIO(string fp)
 {
     filepath = fp;
+
+    // Checks to make sure the file exists
+    ifstream file (filepath);
+    if(!file)
+        throw invalid_argument( "received invalid filepath: " + filepath);
+    else
+        file.close();
 }
+
+// Destructor
 FileIO::~FileIO()
 {
     delete output;
 }
 
+// Fills a Queue with the data from the file and returns it
 GenQ<int>* FileIO::getQueue()
 {
     ifstream file (filepath);
     output = new GenQ<int>();
 
-    if(file.is_open())
-    {
-        file.clear();
-        file.seekg(0);
+    file.clear();
+    file.seekg(0);
 
-        string line;
-        while (getline (file, line))
+    string line;
+    while (getline (file, line))
+    {
+        if(line != "")
         {
-            if(line != "")
-            {
-                output->insert(atoi(line.c_str()));
-            }
-
+            output->insert(atoi(line.c_str()));
         }
-        file.close();
+
     }
-    else
-    {
-        cout << "Invalid filepath" << endl;
-    }
+    file.close();
 
     return output;
 }
