@@ -74,13 +74,15 @@ void Registrar::age(int* sS)
 // Print the stats generated at the end
 void Registrar::printStats()
 {
-    cout << "Mean student wait time: " << meanStudentWait << endl
+    cout << "=====================================================" << endl
+         << "Mean student wait time: " << meanStudentWait << endl
          << "Median student wait time: " << medianStudentWait << endl
          << "Longest a student waited: " << maxStudentWait << endl
          << "Number of students waiting over 10 minutes: " << longStudentWaitTimes << endl
          << "Mean window idle time: " << meanWindowIdleTime << endl
          << "Longest window idle time: " << maxWindowIdleTime << endl
-         << "Number of windows idle for over 5 minutes: " << windowsIdleFor5Minutes << endl;
+         << "Number of windows idle for over 5 minutes: " << windowsIdleFor5Minutes << endl
+         << "=====================================================" << endl;
 }
 
 // Calculate a bunch of analytical stats
