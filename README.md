@@ -22,6 +22,6 @@ valen193@mail.chapman.edu
 
 [c_str](http://www.cplusplus.com/reference/string/string/c_str/)
 
-[In Class Doubly Linked List And Queue Exercises]
+In Class Doubly Linked List And Queue Exercises
 
 [Data Structures And Algorithms In C++](https://www.amazon.com/Data-Structures-Algorithms-C-2nd-ebook/dp/B005FHM6X2)
