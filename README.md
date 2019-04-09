@@ -24,4 +24,4 @@ valen193@mail.chapman.edu
 
 In Class Doubly Linked List And Queue Exercises
 
-[Data Structures And Algorithms In C++](https://www.amazon.com/Data-Structures-Algorithms-C-2nd-ebook/dp/B005FHM6X2)
+Data Structures And Algorithms In C++
