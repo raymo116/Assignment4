@@ -1,7 +1,3 @@
-#include <string>
-#include <iostream>
-#include <algorithm>
-
 #include "Registrar.h"
 
 // This class simulates the Registrar's office

@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include "Window.h"
 
 using namespace std;

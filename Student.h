@@ -1,7 +1,7 @@
 #pragma once
-
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 // This class simulates a student at the registrar's office

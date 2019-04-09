@@ -1,5 +1,9 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <stdlib.h>
+
+#include "genQ.h"
 
 using namespace std;
 

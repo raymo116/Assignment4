@@ -1,11 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <string>
-#include <stdlib.h>
-#include <regex>
-
-#include "genQ.h"
 #include "fileIO.h"
 
 using namespace std;
@@ -42,8 +34,6 @@ GenQ<int>* FileIO::getQueue()
                     throw invalid_argument( "There was an invalid character entered");
             }
             output->insert(atoi(line.c_str()));
-        }
-
         }
         file.close();
     }

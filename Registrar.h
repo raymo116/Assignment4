@@ -1,7 +1,8 @@
 #pragma once
-
 #include <string>
 #include <iostream>
+#include <algorithm>
+
 #include "Window.h"
 
 // This class simulates the Registrar's office

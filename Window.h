@@ -1,9 +1,10 @@
 #pragma once
-
 #include <iostream>
 #include <string>
+
 #include "Student.h"
 #include "GenQ.h"
+
 using namespace std;
 
 class Window

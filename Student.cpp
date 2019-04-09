@@ -1,6 +1,5 @@
-#include <iostream>
-#include <string>
 #include "Student.h"
+
 using namespace std;
 
 // This class simulates a student at the registrar's office
