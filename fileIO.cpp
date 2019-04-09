@@ -36,15 +36,13 @@ GenQ<int>* FileIO::getQueue()
         string line;
         while (getline (file, line))
         {
-            if(line != "" && regex_match(line,regex("[0-9]+")))
+            for (int i = 0; i < line.length(); i++)
             {
-                output->insert(atoi(line.c_str()));
+                if((line[i] > '9')||(line[i] < '0'))
+                    throw invalid_argument( "There was an invalid character entered");
             }
-            else
-            {
-                cout << "Invalid input in file.\n" << endl;
-                break;
-            }
+            output->insert(atoi(line.c_str()));
+        }
 
         }
         file.close();

@@ -41,9 +41,10 @@ int main(int argc, char const *argv[])
             // Analyze the filme and simulate the registrar
             analyze(filepath);
         }
-        catch(invalid_argument)
+        catch(const invalid_argument& message)
         {
-            cout << "That was an invalid filepath. Please try again." << endl;
+            cout << message.what() << endl;
+            cout << "Please try again." << endl;
         }
     }
     else
