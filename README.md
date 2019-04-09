@@ -17,4 +17,11 @@ valen193@mail.chapman.edu
 - Enter `./mRaymond_cValencia.out <filepath>` to analyze a file
 - The stats will be printed if your file/filepath is valid
 
-[HINT] To make things easier, just enter `make && ./mRaymond_cValencia.out <filepath>` to compile and run at the same time
+## References
+[Alpha To Integer](http://www.cplusplus.com/reference/cstdlib/atoi/)
+
+[c_str](http://www.cplusplus.com/reference/string/string/c_str/)
+
+[In Class Doubly Linked List And Queue Exercises]
+
+[Data Structures And Algorithms In C++](https://www.amazon.com/Data-Structures-Algorithms-C-2nd-ebook/dp/B005FHM6X2)
