@@ -1,5 +1,4 @@
 /*
-
 CPSC 350-02
 Assignment 4
 
@@ -12,11 +11,6 @@ Christian Valencia
 valen193@mail.chapman.edu
 
 */
-
-#include <iostream>
-#include <string>
-#include <cstdlib>
-
 #include "genQ.h"
 #include "fileIO.h"
 #include "Registrar.h"
