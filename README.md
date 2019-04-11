@@ -16,6 +16,7 @@ valen193@mail.chapman.edu
 - Enter `make` to compile
 - Enter `./mRaymond_cValencia.out <filepath>` to analyze a file
 - The stats will be printed if your file/filepath is valid
+- NOTE: If a student leaves the registrar at time 4, the next student in line will move into the line at time 4.
 
 ## References
 [Alpha To Integer](http://www.cplusplus.com/reference/cstdlib/atoi/)
