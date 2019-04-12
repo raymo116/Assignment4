@@ -72,12 +72,20 @@ void analyze(string filepath)
     GenQ<Student> futureStudents;
     GenQ<Student> waitingLine;
 
+    int lastTime = 0;
+
     try
     {
         //Parse input for setup
         while(!file->isEmpty())
         {
             timeArrived = file->remove();
+
+            if(timeArrived < lastTime)
+                throw invalid_argument("You entered your students out of order.");
+
+            lastTime = timeArrived;
+
             int numStudents = file->remove();
             for(int i = 0; i < numStudents; i++)
             {
